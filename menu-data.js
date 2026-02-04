@@ -1,0 +1,535 @@
+// Complete African Cuisine Menu Data
+const menuItems = [
+    // Appetizers (Entrées)
+    {
+        id: 1,
+        name: "Lentilles à la Marocaine",
+        category: "appetizers",
+        price: 8.50,
+        image: "data:image/jpeg;base64,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",
+        description: "Délicieuses lentilles marocaines avec épices authentiques, servies chaudes et réconfortantes.",
+        details: "Les lentilles à la marocaine, aussi appelées Aâdess ou 3dess, font partie des plats les plus réconfortants de la cuisine nord-africaine.",
+        ingredients: "Lentilles corail, oignons, ail, épices (cumin, paprika), huile d'olive, sel",
+        preparation: "20-25 minutes",
+        countries: ["Maroc", "Algérie", "Tunisie"]
+    },
+    {
+        id: 2,
+        name: "Batata Mchermla",
+        category: "appetizers",
+        price: 7.00,
+        image: "images/menu/img-1-photo-1541519227354-08fa5d50c44d",
+        description: "Pommes de terre à la Chermoula marocaine, relevées et délicieuses.",
+        details: "Batata Mchermla est l'un des plats les plus populaires de la cuisine marocaine, facile à préparer et savoureux.",
+        ingredients: "Pommes de terre, coriandre fraîche, persil, ail, citron, piment, cumin, huile d'olive",
+        preparation: "15-20 minutes",
+        countries: ["Maroc"]
+    },
+    {
+        id: 3,
+        name: "Zaalouk Marocain",
+        category: "appetizers",
+        price: 7.50,
+        image: "images/menu/img-2-photo-1607623814075-e51df1bdc82f",
+        description: "Caviar d'aubergines grillées, une spécialité marocaine incontournable.",
+        details: "Le Zaalouk est un plat emblématique de la gastronomie du Maghreb, souvent surnommé le caviar du pauvre.",
+        ingredients: "Aubergines grillées, tomates, ail, coriandre, citron, paprika, huile d'olive",
+        preparation: "20 minutes",
+        countries: ["Maroc", "Algérie"]
+    },
+    {
+        id: 4,
+        name: "Crevettes Pil Pil",
+        category: "appetizers",
+        price: 12.00,
+        image: "images/menu/img-3-photo-1565957767126-ad88b97f9f17",
+        description: "Crevettes marocaines épicées dans une sauce délicieuse à base d'ail et piment.",
+        details: "Une entrée chaude, parfumée et prête en quelques minutes. Idéale pour commencer un repas.",
+        ingredients: "Crevettes fraîches, ail, piment rouge, huile d'olive, coriandre, sel",
+        preparation: "10-15 minutes",
+        countries: ["Maroc"]
+    },
+    {
+        id: 5,
+        name: "Kachumbari",
+        category: "appetizers",
+        price: 6.00,
+        image: "images/menu/img-4-photo-1540189549336-e6e99c3679fe",
+        description: "Salade africaine ultra rafraîchissante, simple et rapide à faire.",
+        details: "Une délicieuse salade est-africaine parfaite pour l'été, originaire d'Éthiopie, Kenya et Ouganda.",
+        ingredients: "Tomates fraîches, oignons, citron, coriandre fraîche, piment, sel",
+        preparation: "10 minutes",
+        countries: ["Éthiopie", "Kenya", "Ouganda"]
+    },
+    {
+        id: 6,
+        name: "Foutou Banane",
+        category: "appetizers",
+        price: 8.00,
+        image: "images/menu/img-5-photo-1552621554-5fefe8c9ef14",
+        description: "Boule de pâte à base de bananes plantains et manioc pilés, accompagnement traditionnel.",
+        details: "Le Foutou banane est un plat traditionnel ivoirien, l'accompagnement idéal de nombreux ragoûts.",
+        ingredients: "Bananes plantains, manioc, eau, sel, beurre",
+        preparation: "25 minutes",
+        countries: ["Côte d'Ivoire"]
+    },
+    {
+        id: 7,
+        name: "Foufou de Manioc",
+        category: "appetizers",
+        price: 7.50,
+        image: "images/menu/img-6-photo-1546069901-ba9599a7e63c",
+        description: "Fufu de Manioc, accompagnement traditionnel de la cuisine africaine.",
+        details: "Un incontournable de la cuisine africaine, ce plat est doux, moelleux et savoureux.",
+        ingredients: "Manioc frais, eau, sel, beurre, épices",
+        preparation: "20-30 minutes",
+        countries: ["Cameroun", "Congo", "Côte d'Ivoire", "Ghana"]
+    },
+    {
+        id: 8,
+        name: "Alloco",
+        category: "appetizers",
+        price: 6.50,
+        image: "images/menu/img-7-photo-1585238341710-4913dfb1d08b",
+        description: "Bananes plantains frites, entrée croquante et savoureuse.",
+        details: "L'alloco, l'aloko ou encore loco est un plat traditionnel de la Côte d'Ivoire très populaire.",
+        ingredients: "Bananes plantains, huile de palme, oignons, sauce piquante",
+        preparation: "15 minutes",
+        countries: ["Côte d'Ivoire"]
+    },
+    {
+        id: 9,
+        name: "Sauce Verte",
+        category: "appetizers",
+        price: 5.50,
+        image: "images/menu/img-8-photo-1596040122839-ded66e26c67f",
+        description: "Sauce verte à base d'herbes fraîches, accompagnement ou marinade délicieuse.",
+        details: "La célèbre sauce verte est à la fois un accompagnement pour les grillades et une excellente marinade.",
+        ingredients: "Persil frais, coriandre, ail, oignon, citron, piment, huile d'olive",
+        preparation: "10 minutes",
+        countries: ["Cameroun", "Côte d'Ivoire", "Sénégal", "Togo"]
+    },
+    {
+        id: 10,
+        name: "Msemen",
+        category: "appetizers",
+        price: 6.00,
+        image: "images/menu/img-9-photo-1565299585323-38d6b0865b47",
+        description: "Crêpe feuilletée marocaine traditionnelle, à manger à toute heure.",
+        details: "Le Msemen est un pain incontournable du Maghreb, savoureux et accompagne tous les types de plats.",
+        ingredients: "Farine, beurre, huile, eau, sel",
+        preparation: "30 minutes",
+        countries: ["Maroc", "Algérie", "Tunisie"]
+    },
+
+    // Main Courses (Plats)
+    {
+        id: 11,
+        name: "Bakbouka",
+        category: "mains",
+        price: 13.50,
+        image: "https://images.unsplash.com/photo-1565957767126-ad88b97f9f17?w=400&h=300&fit=crop",
+        description: "Ragoût de tripes traditionnel, plat emblématique du Maghreb.",
+        details: "La Bakbouka, aussi appelée « Douara », est le plat emblématique des célébrations maghrébines.",
+        ingredients: "Tripes, ail, oignons, tomates, épices traditionnelles (carvi, paprika), huile d'olive",
+        preparation: "45-60 minutes",
+        countries: ["Algérie", "Maroc"]
+    },
+    {
+        id: 12,
+        name: "Tajine Tunisien au Poulet",
+        category: "mains",
+        price: 11.00,
+        image: "https://images.unsplash.com/photo-1630384478064-7af4bf8ea5d5?w=400&h=300&fit=crop",
+        description: "Véritable symbole de la cuisine du Maghreb, doux et authentique.",
+        details: "À la différence du tajine marocain, le tajine tunisien se prépare différemment mais reste délicieux.",
+        ingredients: "Poulet, oignons, ail, épices (cumin, coriandre), olive, huile d'olive, harissa",
+        preparation: "35-40 minutes",
+        countries: ["Tunisie"]
+    },
+    {
+        id: 13,
+        name: "Couscous Marocain",
+        category: "mains",
+        price: 12.00,
+        image: "https://images.unsplash.com/photo-1505521991350-87dc59a47fe1?w=400&h=300&fit=crop",
+        description: "Véritable recette du couscous marocain traditionnel au poulet.",
+        details: "Un couscous traditionnel que vous pouvez adapter avec la viande de votre choix.",
+        ingredients: "Couscous, poulet, carottes, navets, oignons, épices marocaines (cumin, paprika, cannelle)",
+        preparation: "45 minutes",
+        countries: ["Maroc"]
+    },
+    {
+        id: 14,
+        name: "Navets à la Marocaine",
+        category: "mains",
+        price: 9.00,
+        image: "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=400&h=300&fit=crop",
+        description: "Saveur orientale authentique, plat simple et économique.",
+        details: "Un plat simple, économique et plein de goût, avec une saveur orientale authentique.",
+        ingredients: "Navets, ail, oignons, coriandre fraîche, cumin, huile d'olive, ras el hanout",
+        preparation: "25 minutes",
+        countries: ["Maroc"]
+    },
+    {
+        id: 15,
+        name: "Garba (Attieke et Thon)",
+        category: "mains",
+        price: 10.50,
+        image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop",
+        description: "Attieke et thon frit ivoirien, délicieuse combinaison de saveurs.",
+        details: "Le Garba est une délicieuse recette ivoirienne, servie avec du thon frit et des légumes.",
+        ingredients: "Attieke (semoule), thon frais, oignons, tomates, ciboulette, piment, citron",
+        preparation: "20 minutes",
+        countries: ["Côte d'Ivoire"]
+    },
+    {
+        id: 16,
+        name: "Doro Wat",
+        category: "mains",
+        price: 12.50,
+        image: "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400&h=300&fit=crop",
+        description: "Ragoût de poulet éthiopien traditionnel, parfait pour les fêtes.",
+        details: "Une recette traditionnelle éthiopienne idéale pour explorer les saveurs du monde lors de célébrations.",
+        ingredients: "Poulet, ail, gingembre frais, piment rouge, paprika, moutarde, huile d'olive",
+        preparation: "50 minutes",
+        countries: ["Éthiopie"]
+    },
+    {
+        id: 17,
+        name: "Boulettes Kefta",
+        category: "mains",
+        price: 11.00,
+        image: "https://images.unsplash.com/photo-1555939594-58d7cb561cea?w=400&h=300&fit=crop",
+        description: "Boulettes Kefta marocaines savourenses, voyage culinaire au Maghreb.",
+        details: "Un voyage culinaire au cœur de la cuisine marocaine avec ces délicieuses boulettes épicées.",
+        ingredients: "Viande hachée (boeuf ou agneau), oignons, coriandre fraîche, cumin, piment, oeuf",
+        preparation: "30 minutes",
+        countries: ["Maroc"]
+    },
+    {
+        id: 18,
+        name: "Sauce Gombo",
+        category: "mains",
+        price: 10.00,
+        image: "https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?w=400&h=300&fit=crop",
+        description: "Sauce Gombo ou Soupou Kandia, une sauce mythique de la cuisine africaine.",
+        details: "Tout comme la sauce graine, la sauce gombo est une des sauces mythiques de la cuisine africaine.",
+        ingredients: "Gombo frais, oignons, ail, tomates, huile de palme, viande ou poisson, épices",
+        preparation: "40 minutes",
+        countries: ["Bénin", "Cameroun", "Côte d'Ivoire", "Guinée", "Sénégal"]
+    },
+    {
+        id: 19,
+        name: "Sauce Graine",
+        category: "mains",
+        price: 10.50,
+        image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop",
+        description: "Sauce Graine mythique et incontournable de la cuisine africaine.",
+        details: "Aussi appelée « Palm nut Soup », c'est un incontournable de la gastronomie africaine.",
+        ingredients: "Noix de palme, tomates, oignons, ail, viande ou poisson, épices",
+        preparation: "45 minutes",
+        countries: ["Bénin", "Cameroun", "Côte d'Ivoire", "Sénégal", "Togo"]
+    },
+    {
+        id: 20,
+        name: "Jollof Rice",
+        category: "mains",
+        price: 9.50,
+        image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop",
+        description: "Riz Jollof emblématique de la cuisine africaine, notamment ouest-africaine.",
+        details: "Le Jollof Rice est un plat emblématique de la cuisine africaine, très populaire en Afrique de l'Ouest.",
+        ingredients: "Riz long grain, tomates, oignons, poivrons, ail, bouillon, huile de palme, épices",
+        preparation: "30 minutes",
+        countries: ["Ghana", "Nigéria", "Sénégal"]
+    },
+    {
+        id: 21,
+        name: "Thieboudienne",
+        category: "mains",
+        price: 13.00,
+        image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop",
+        description: "Riz au poisson sénégalais traditionnel, plat populaire en Afrique.",
+        details: "Le Thieboudienne, qui signifie « riz au poisson », est un plat traditionnel Sénégalais réputé.",
+        ingredients: "Poisson frais, riz, tomates, oignons, carottes, courge, petits pois, épices",
+        preparation: "50 minutes",
+        countries: ["Sénégal"]
+    },
+    {
+        id: 22,
+        name: "Bobotie",
+        category: "mains",
+        price: 12.00,
+        image: "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400&h=300&fit=crop",
+        description: "Recette traditionnelle sud-africaine épicée et succulente.",
+        details: "Le bobotie est un plat traditionnel sud-africain généralement préparé à base de viande hachée et d'oeufs.",
+        ingredients: "Viande hachée, oeufs, oignons, ail, raisins secs, amandes, épices, pain blanc",
+        preparation: "45 minutes",
+        countries: ["Afrique du Sud"]
+    },
+    {
+        id: 23,
+        name: "Mafé Poulet",
+        category: "mains",
+        price: 11.50,
+        image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop",
+        description: "Poulet à la sénégalaise, recette incontournable de la gastronomie africaine.",
+        details: "Le Mafé Poulet est une recette incontournable de la gastronomie africaine et plus particulièrement.",
+        ingredients: "Poulet, beurre de cacahuète, tomates, oignons, ail, épices (cumin, paprika)",
+        preparation: "40 minutes",
+        countries: ["Sénégal"]
+    },
+    {
+        id: 24,
+        name: "Poulet Yassa",
+        category: "mains",
+        price: 11.00,
+        image: "https://images.unsplash.com/photo-1630384478064-7af4bf8ea5d5?w=400&h=300&fit=crop",
+        description: "Plat traditionnel sénégalais préféré, poulet mariné aux oignons.",
+        details: "Le Poulet Yassa est une recette traditionnelle Sénégalaise à base de poulet mariné, oignons et olives.",
+        ingredients: "Poulet, oignons, citron, moutarde, olives, ail, piment, huile d'olive",
+        preparation: "35 minutes",
+        countries: ["Sénégal"]
+    },
+    {
+        id: 25,
+        name: "Henomby Ritra",
+        category: "mains",
+        price: 13.50,
+        image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop",
+        description: "Boeuf braisé de Madagascar, saveur authentique et délicieuse.",
+        details: "Le Hen'omby ritra est un plat typique de Madagascar, recette de bœuf fondant aux oignons et tomate.",
+        ingredients: "Boeuf, oignons, tomates, ail, gingembre, poivre, huile, sauce soja",
+        preparation: "60 minutes",
+        countries: ["Madagascar"]
+    },
+    {
+        id: 26,
+        name: "Romazava",
+        category: "mains",
+        price: 12.50,
+        image: "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400&h=300&fit=crop",
+        description: "Plat traditionnel malgache, aussi populaire aux Comores.",
+        details: "Le romazava est un plat traditionnel de la cuisine malgache à base de viande et herbes.",
+        ingredients: "Boeuf, légumes verts, tomates, oignons, ail, épices traditionnelles malgaches",
+        preparation: "55 minutes",
+        countries: ["Madagascar", "Comores"]
+    },
+    {
+        id: 27,
+        name: "Ravitoto",
+        category: "mains",
+        price: 11.00,
+        image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop",
+        description: "Plat emblématique de Madagascar, riche et authentique.",
+        details: "Découvrez le Ravitoto Sy Henakisoa, le plat emblématique de Madagascar avec ses saveurs uniques.",
+        ingredients: "Feuilles de manioc, viande de porc, oignons, ail, bouillon, sel, poivre",
+        preparation: "45 minutes",
+        countries: ["Madagascar"]
+    },
+    {
+        id: 28,
+        name: "Mafé Boeuf",
+        category: "mains",
+        price: 12.00,
+        image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop",
+        description: "Boeuf à la sénégalaise, aussi appelé ragoût d'arachide.",
+        details: "Le Mafé au boeuf sénégalais est une recette populaire d'Afrique de l'Ouest.",
+        ingredients: "Boeuf, beurre de cacahuète, tomates, oignons, ail, épices, carotte, patate douce",
+        preparation: "50 minutes",
+        countries: ["Sénégal", "Côte d'Ivoire", "Mali", "Togo"]
+    },
+    {
+        id: 29,
+        name: "Poulet DG Camerounais",
+        category: "mains",
+        price: 11.50,
+        image: "https://images.unsplash.com/photo-1630384478064-7af4bf8ea5d5?w=400&h=300&fit=crop",
+        description: "Poulet Directeur Général, plat phare de la cuisine camerounaise.",
+        details: "Le poulet DG est le plat phare de la cuisine Camerounaise, très gourmand et apprécié de tous.",
+        ingredients: "Poulet, oignons, champignons, tomates, crème fraîche, ail, épices",
+        preparation: "35 minutes",
+        countries: ["Cameroun"]
+    },
+    {
+        id: 30,
+        name: "Dambou Couscous",
+        category: "mains",
+        price: 9.50,
+        image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop",
+        description: "Couscous aux épinards du Niger, plat délicieux et copieux.",
+        details: "Le Dambou est un délicieux couscous aux épinards tout droit venu du Niger.",
+        ingredients: "Couscous, épinards frais, oignons, ail, bouillon, huile, sel, poivre",
+        preparation: "30 minutes",
+        countries: ["Niger", "Bénin"]
+    },
+
+    // Sauces
+    {
+        id: 31,
+        name: "Sauce Arachide",
+        category: "sauces",
+        price: 5.00,
+        image: "https://images.unsplash.com/photo-1596040122839-ded66e26c67f?w=400&h=300&fit=crop",
+        description: "Sauce mythique africaine à base de beurre de cacahuète et épices.",
+        details: "La sauce arachide est souvent accompagnée de Foutou, de riz ou de couscous.",
+        ingredients: "Beurre de cacahuète, tomates, oignons, ail, épices, eau, sel",
+        preparation: "20 minutes",
+        countries: ["Bénin", "Côte d'Ivoire", "Guinée", "Mali", "Sénégal", "Togo"]
+    },
+    {
+        id: 32,
+        name: "Piri Piri",
+        category: "sauces",
+        price: 4.50,
+        image: "https://images.unsplash.com/photo-1596040122839-ded66e26c67f?w=400&h=300&fit=crop",
+        description: "Sauce pimentée aux pili pili, originaire d'Angola ou Mozambique.",
+        details: "La Sauce Piri Piri aussi appelée sauce Peri Peri est une sauce épicée traditionnelle africaine.",
+        ingredients: "Piments piri piri, ail, vinaigre, huile d'olive, jus de citron",
+        preparation: "10 minutes",
+        countries: ["Angola", "Mozambique"]
+    },
+
+    // Desserts
+    {
+        id: 33,
+        name: "Harcha Marocaine",
+        category: "desserts",
+        price: 7.50,
+        image: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&h=300&fit=crop",
+        description: "Gâteau de semoule fine moelleux, populaire dans le Maghreb.",
+        details: "La Harcha est un gâteau de semoule marocain moelleux, très populaire dans le Maghreb.",
+        ingredients: "Semoule fine, huile d'olive, sucre, levure, sel, eau, graines de courge",
+        preparation: "30 minutes",
+        countries: ["Maroc", "Algérie", "Tunisie"]
+    },
+    {
+        id: 34,
+        name: "Baghrir",
+        category: "desserts",
+        price: 8.00,
+        image: "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400&h=300&fit=crop",
+        description: "Crêpes milles trous délicieuses du Maghreb.",
+        details: "Les Baghrir sont des délicieuses crêpes avec pleins de petits trous, d'où son surnom.",
+        ingredients: "Farine, semoule, levure, eau, beurre fondu, miel",
+        preparation: "25 minutes",
+        countries: ["Algérie", "Maroc", "Tunisie"]
+    },
+    {
+        id: 35,
+        name: "Mbouraké",
+        category: "desserts",
+        price: 6.50,
+        image: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&h=300&fit=crop",
+        description: "Dessert africain au fromage blanc, arachide et fruits.",
+        details: "Le Mbouraké est un classique de la cuisine africaine, idéal pour le goûter ou le petit déjeuner.",
+        ingredients: "Fromage blanc, cacahuètes moulues, sucre, fruits (bananes, papayes), vanille",
+        preparation: "15 minutes",
+        countries: ["Sénégal"]
+    },
+    {
+        id: 36,
+        name: "Thiakry (Dégué)",
+        category: "desserts",
+        price: 7.00,
+        image: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&h=300&fit=crop",
+        description: "Dessert africain onctueux à la semoule de mil.",
+        details: "Le Thiakry aussi appelé Dégué est un délicieux dessert de la cuisine ouest-africaine.",
+        ingredients: "Semoule de mil, lait, sucre, beurre, vanille, noix de coco râpée",
+        preparation: "20 minutes",
+        countries: ["Cameroun", "Côte d'Ivoire", "Mauritanie", "Sénégal", "Togo"]
+    },
+
+    // Beverages (Boissons)
+    {
+        id: 37,
+        name: "Bouye",
+        category: "beverages",
+        price: 4.50,
+        image: "https://images.unsplash.com/photo-1592195853828-11ac59a8d49b?w=400&h=300&fit=crop",
+        description: "Jus de baobab traditionnel africain, excellent pour la santé.",
+        details: "Le Bouye est une boisson traditionnelle africaine réalisée avec la pulpe du fruit du Baobab.",
+        ingredients: "Pulpe de baobab, eau, sucre, citron",
+        preparation: "5 minutes",
+        countries: ["Sénégal", "Mali"]
+    },
+    {
+        id: 38,
+        name: "Gnamankoudji",
+        category: "beverages",
+        price: 3.50,
+        image: "https://images.unsplash.com/photo-1556745753-b2904692573d?w=400&h=300&fit=crop",
+        description: "Jus de gingembre frais, signifie 'eau pimentée' en bambara/dioula.",
+        details: "Le Gnamankoudji est une boisson africaine très populaire, un jus de gingembre frais rafraîchissant.",
+        ingredients: "Gingembre frais, citron, sucre, eau, miel, piment",
+        preparation: "10 minutes",
+        countries: ["Bénin", "Côte d'Ivoire", "Guinée", "Mali", "Sénégal", "Togo"]
+    },
+    {
+        id: 39,
+        name: "Jus de Tamarin",
+        category: "beverages",
+        price: 4.00,
+        image: "https://images.unsplash.com/photo-1577003833154-a92bbd63dd1f?w=400&h=300&fit=crop",
+        description: "Boisson aux nombreuses vertus, rafraîchissante et savoureuse.",
+        details: "Le Jus de Tamarin aussi appelé Tomi Dji ou Dakhar au Sénégal est une boisson traditionnelle.",
+        ingredients: "Pulpe de tamarin, eau, sucre, miel, épices (gingembre, cannelle)",
+        preparation: "10 minutes",
+        countries: ["Mali", "Sénégal"]
+    },
+    {
+        id: 40,
+        name: "Bissap",
+        category: "beverages",
+        price: 4.00,
+        image: "https://images.unsplash.com/photo-1575470380141-98c5550ecf0c?w=400&h=300&fit=crop",
+        description: "Jus d'hibiscus traditionnel africain, rafraîchissant et sain.",
+        details: "Bissap est une boisson rafraîchissante, savoureuse et saine, boisson traditionnelle africaine.",
+        ingredients: "Fleurs d'hibiscus séchées, eau, sucre, gingembre, citron",
+        preparation: "15 minutes",
+        countries: ["Sénégal", "Togo"]
+    },
+
+    // Breads (Pains)
+    {
+        id: 41,
+        name: "Tabouna",
+        category: "mains",
+        price: 5.50,
+        image: "https://images.unsplash.com/photo-1586985289688-cacf52ca53c7?w=400&h=300&fit=crop",
+        description: "Pain tunisien traditionnel rustique, accompagnement de tous les repas.",
+        details: "Le pain Tabouna occupe une place centrale dans la cuisine tunisienne.",
+        ingredients: "Farine, eau, levure, sel, huile d'olive",
+        preparation: "45 minutes",
+        countries: ["Tunisie"]
+    },
+    {
+        id: 42,
+        name: "Batbout",
+        category: "mains",
+        price: 5.00,
+        image: "https://images.unsplash.com/photo-1556745753-b2904692573d?w=400&h=300&fit=crop",
+        description: "Petit pain rond marocain populaire, notamment pendant le Ramadan.",
+        details: "Le Batbout est un petit pain rond marocain très populaire, facile à réaliser.",
+        ingredients: "Farine, levure, sel, huile, eau",
+        preparation: "30 minutes",
+        countries: ["Maroc"]
+    },
+    {
+        id: 43,
+        name: "Injera",
+        category: "appetizers",
+        price: 6.50,
+        image: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&h=300&fit=crop",
+        description: "Galettes éthiopiennes sans gluten, pain traditionnel africain.",
+        details: "Le pain Injera est un pain typique de plusieurs pays africains comme l'Éthiopie.",
+        ingredients: "Farine de teff, eau, levain, sel",
+        preparation: "60 minutes (avec fermentation)",
+        countries: ["Éthiopie"]
+    }
+];
+
+// Export for use in main.js
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = menuItems;
+}

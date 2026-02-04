@@ -1,0 +1,105 @@
+# ⚡ QUICK START - Order & Email System
+
+## What's Ready ✅
+
+Your Africa Cuisine website **automatically**:
+- 📦 Saves every order placed
+- 📧 Sends confirmation email to customer
+- 📧 Sends notification email to you
+- 📊 Shows all orders in admin dashboard
+
+## What You Need To Do ⏳
+
+### Step 1: Get Gmail App Password (5 min)
+1. Go to: https://myaccount.google.com/apppasswords
+2. Select "Mail" → "Windows Computer"
+3. Copy the 16-character password Google gives you
+
+### Step 2: Update .env File (2 min)
+1. Open: `server/.env`
+2. Find: `EMAIL_PASSWORD=your_app_password_here`
+3. Replace with your 16-character password
+4. Save
+
+### Step 3: Test It (3 min)
+1. Start server: `npm start` (in server folder)
+2. Place test order at http://localhost:3000
+3. Check email inbox for 2 emails
+
+## Result ✅
+
+✅ Every order automatically saved  
+✅ Customer gets confirmation email  
+✅ You get order notification email  
+✅ View orders in admin dashboard (click 🔒 lock icon)  
+
+---
+
+## Access Admin Dashboard
+
+1. Click lock icon (🔒) in top-right
+2. Password: `admin2024`
+3. View all orders
+4. Change status: pending → completed → cancelled
+
+---
+
+## Payment Methods Supported
+
+- ✅ Stripe (Credit Card)
+- ✅ Bank Transfer
+- ✅ Wave Mobile Money
+- ✅ Orange Money
+- ✅ MTN Mobile Money
+
+All automatically saved and emailed.
+
+---
+
+## Credentials
+
+| Item | Value |
+|---|---|
+| Admin Password | `admin2024` |
+| Server Port | 3000 |
+| Email From | kenycruz701@gmail.com |
+| Orders Endpoint | `/api/orders` |
+
+---
+
+## Troubleshooting
+
+**Emails not working?**
+- Check you added Gmail App Password (no spaces)
+- Verify 2-Step Verification enabled on Gmail
+- Restart server
+
+**Orders not showing?**
+- Try refresh browser
+- Check admin password: `admin2024`
+- Server must be running
+
+**Server won't start?**
+- Run: `npm install`
+- Then: `npm start`
+
+---
+
+## Files Modified
+
+- ✅ `server/server.js` - Added Stripe order saving
+- ✅ `server/.env` - Created configuration file
+- ✅ `js/main.js` - Updated Stripe payment handler
+
+---
+
+## That's It! 🚀
+
+Once you add your Gmail App Password, you're done.
+
+Your system will automatically:
+1. Save every order
+2. Send confirmation emails
+3. Show orders in admin dashboard
+
+**Total setup time: ~10 minutes**

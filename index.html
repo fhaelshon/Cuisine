@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Africa Cuisine - Authentique Gastronomie Africaine</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-brand">
+                <a href="#home" class="logo">
+                    <i class="fas fa-utensils"></i> Africa Cuisine
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Accueil</a></li>
+                <li><a href="#menu" class="nav-link">Menu</a></li>
+                <li><a href="#about" class="nav-link">À propos</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+                <li>
+                    <button class="cart-btn" id="cartBtn">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </button>
+                </li>
+                <li>
+                    <button class="admin-btn" id="adminBtn" title="Espace Admin">
+                        <i class="fas fa-lock"></i>
+                    </button>
+                </li>
+            </ul>
+            <div class="nav-extra">
+                <select id="langSelect" class="lang-select" aria-label="Choisir la langue">
+                    <option value="fr">Français</option>
+                    <option value="en">English</option>
+                    <option value="es">Español</option>
+                    <option value="pt">Português</option>
+                    <option value="sw">Kiswahili</option>
+                </select>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title animate-fade" data-i18n="hero.title">La Cuisine Africaine à la Maison!</h1>
+            <p class="hero-subtitle animate-slide" data-i18n="hero.subtitle">Découvrez les meilleures recettes traditionnelles africaines</p>
+            <button class="cta-button" data-i18n="cta.discover" onclick="document.getElementById('menu').scrollIntoView({behavior: 'smooth'})">
+                Découvrir le Menu
+            </button>
+        </div>
+        <div class="hero-overlay"></div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="menu-section">
+        <div class="container">
+            <h2 class="section-title">Notre Menu</h2>
+            
+            <!-- Filter Buttons -->
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">Tous</button>
+                <button class="filter-btn" data-filter="appetizers">Entrées</button>
+                <button class="filter-btn" data-filter="mains">Plats</button>
+                <button class="filter-btn" data-filter="desserts">Desserts</button>
+                <button class="filter-btn" data-filter="beverages">Boissons</button>
+                <button class="filter-btn" data-filter="sauces">Sauces</button>
+            </div>
+
+            <!-- Menu Items Grid -->
+            <div class="menu-grid" id="menuGrid">
+                <!-- Menu items will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal pour détails du plat -->
+    <div class="modal" id="menuModal">
+        <div class="modal-content animate-scale">
+            <span class="close">&times;</span>
+            <div class="modal-header">
+                <h2 id="modalTitle"></h2>
+            </div>
+            <div class="modal-body">
+                <img id="modalImage" src="" alt="" class="modal-image">
+                <div class="modal-info">
+                    <p id="modalDescription"></p>
+                    <p id="modalOrigin" class="modal-origin"></p>
+                    <div class="modal-details">
+                        <div class="detail-item">
+                            <strong>Ingrédients principaux:</strong>
+                            <p id="modalIngredients"></p>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Préparation:</strong>
+                            <p id="modalPrep"></p>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Pays d'origine:</strong>
+                            <p id="modalCountries"></p>
+                        </div>
+                    </div>
+                    <div class="price-section">
+                        <label for="modalQuantity" data-i18n="quantity">Quantité:</label>
+                        <input type="number" id="modalQuantity" min="1" value="1" max="20">
+                        <span id="modalPrice" class="modal-price"></span>
+                    </div>
+
+                    <!-- Rating & Favorites Section -->
+                    <div class="rating-section">
+                        <div class="rating-controls">
+                            <div class="stars-container">
+                                <span data-i18n="rating">Note:</span>
+                                <div class="stars" id="dishRating">
+                                    <button class="star" data-value="1" title="1 star">⭐</button>
+                                    <button class="star" data-value="2" title="2 stars">⭐</button>
+                                    <button class="star" data-value="3" title="3 stars">⭐</button>
+                                    <button class="star" data-value="4" title="4 stars">⭐</button>
+                                    <button class="star" data-value="5" title="5 stars">⭐</button>
+                                </div>
+                                <span id="ratingDisplay" class="rating-display"></span>
+                            </div>
+                            <button id="favoriteBtn" class="favorite-btn" data-i18n="favorite" title="Add to favorites">❤️ Aimer</button>
+                        </div>
+                    </div>
+
+                    <!-- Similar Dishes Suggestions -->
+                    <div class="similar-dishes-section">
+                        <h4 data-i18n="similar">Plats similaires</h4>
+                        <div class="similar-dishes-grid" id="similarDishesGrid">
+                            <!-- Similar dishes will be populated by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-cancel" onclick="closeModal()">Fermer</button>
+                <button class="btn-add-to-cart" id="addToCartBtn">Ajouter au panier</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Shopping Cart Modal -->
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-modal-content">
+            <span class="close" onclick="closeCart()">&times;</span>
+            <h2>Votre Panier</h2>
+            <div class="cart-items" id="cartItems">
+                <!-- Cart items will be populated by JavaScript -->
+            </div>
+            <div class="cart-summary">
+                <div class="summary-row">
+                    <span>Sous-total:</span>
+                    <span id="subtotal">0.00€</span>
+                </div>
+                <div class="summary-row">
+                    <span>Frais de livraison:</span>
+                    <span id="shipping">2.50€</span>
+                </div>
+                <div class="summary-row total">
+                    <span>Total:</span>
+                    <span id="total">0.00€</span>
+                </div>
+            </div>
+            <button class="btn-checkout" onclick="goToCheckout()">Passer la Commande</button>
+        </div>
+    </div>
+
+    <!-- Background audio player: calm-ambient.mp3 by Clavier-Music (auto-plays continuously) -->
+    <audio id="bgAudio" src="audio/calm-ambient.mp3" loop preload="auto" autoplay muted></audio>
+    <button id="musicToggle" class="music-btn" aria-pressed="false" data-i18n="music.toggle" title="Toggle background music">♫</button>
+
+    <!-- Workshop Registration Modal -->
+    <div class="modal" id="workshopModal">
+        <div class="modal-content animate-scale">
+            <span class="close workshop-close">&times;</span>
+            <div class="modal-header">
+                <h2>Inscription - Atelier Culinaire</h2>
+            </div>
+            <div class="modal-body">
+                <form id="workshopForm" class="workshop-form">
+                    <label>Nom complet
+                        <input type="text" id="wsName" required>
+                    </label>
+                    <label>Email
+                        <input type="email" id="wsEmail" required>
+                    </label>
+                    <label>Téléphone
+                        <input type="tel" id="wsPhone">
+                    </label>
+                    <label>Date souhaitée
+                        <input type="date" id="wsDate" required>
+                    </label>
+                    <label>Participants
+                        <input type="number" id="wsParticipants" min="1" value="1" required>
+                    </label>
+                    <label>Formule
+                        <select id="wsOption">
+                            <option value="intro" data-price="35">Introduction - 35€ / personne</option>
+                            <option value="advanced" data-price="55">Avancé - 55€ / personne</option>
+                            <option value="private" data-price="150">Privé - 150€ (session unique)</option>
+                        </select>
+                    </label>
+
+                    <div class="workshop-price-row">
+                        <strong>Montant estimé: </strong>
+                        <span id="wsAmount">35.00€</span>
+                    </div>
+
+                    <fieldset class="payment-methods">
+                        <legend>Méthode de paiement</legend>
+                        <label><input type="radio" name="wsPayment" value="stripe" checked> Carte (Stripe)</label>
+                        <label><input type="radio" name="wsPayment" value="wave"> Wave
+                        </label>
+                        <label><input type="radio" name="wsPayment" value="orange"> Orange Money</label>
+                        <label><input type="radio" name="wsPayment" value="mtn"> MTN Mobile Money</label>
+                        <label><input type="radio" name="wsPayment" value="bank"> Virement bancaire</label>
+                    </fieldset>
+
+                    <div id="stripePaymentArea" class="payment-area">
+                        <div id="stripe-card-element"></div>
+                        <div id="card-errors" role="alert"></div>
+                    </div>
+
+                    <div id="mobileMoneyDetails" class="payment-area" style="display:none;">
+                        <p class="muted">Après l'inscription, vous recevrez les instructions pour payer via mobile money.</p>
+                    </div>
+
+                    <div id="bank-details" class="payment-area" style="display:none;">
+                        <p class="muted">Effectuez un virement en indiquant votre nom et la date de l'atelier. IBAN: FR00 0000 0000 0000 0000 0000</p>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn-cancel workshop-cancel">Annuler</button>
+                        <button type="submit" class="btn-primary" id="workshopRegisterBtn">Payer & S'inscrire</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Section -->
+    <section id="checkout" class="checkout-section hidden">
+        <div class="container">
+            <h2 class="section-title">Passer Votre Commande</h2>
+            <div class="checkout-container">
+                <div class="checkout-form-wrapper">
+                    <h3>Informations de Livraison</h3>
+                    <form id="checkoutForm" class="checkout-form">
+                        <div class="form-group">
+                            <label for="firstName">Prénom</label>
+                            <input type="text" id="firstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Nom</label>
+                            <input type="text" id="lastName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Téléphone</label>
+                            <input type="tel" id="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Adresse</label>
+                            <input type="text" id="address" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="city">Ville</label>
+                                <input type="text" id="city" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="postal">Code Postal</label>
+                                <input type="text" id="postal" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="country">Pays</label>
+                            <input type="text" id="country" value="Bénin" required>
+                        </div>
+
+                        <h3 style="margin-top: 30px;">Méthode de Paiement</h3>
+                        <div class="payment-methods">
+                            <label class="payment-option">
+                                <input type="radio" name="paymentMethod" value="stripe" checked>
+                                <span><i class="fas fa-credit-card"></i> Carte Bancaire (Stripe)</span>
+                            </label>
+                            <label class="payment-option">
+                                <input type="radio" name="paymentMethod" value="bank">
+                                <span><i class="fas fa-university"></i> Virement Bancaire</span>
+                            </label>
+                            <label class="payment-option">
+                                <input type="radio" name="paymentMethod" value="wave">
+                                <span><i class="fas fa-mobile-alt"></i> Wave Mobile Money</span>
+                            </label>
+                            <label class="payment-option">
+                                <input type="radio" name="paymentMethod" value="orange">
+                                <span><i class="fas fa-mobile-alt"></i> Orange Money</span>
+                            </label>
+                            <label class="payment-option">
+                                <input type="radio" name="paymentMethod" value="mtn">
+                                <span><i class="fas fa-mobile-alt"></i> MTN Mobile Money</span>
+                            </label>
+                        </div>
+
+                        <!-- Stripe Card Element -->
+                        <div id="stripe-card-element" class="stripe-card-element" style="display: none;"></div>
+                        <div id="card-errors" class="card-errors"></div>
+
+                        <!-- Bank Transfer Details -->
+                        <div id="bank-details" class="bank-details" style="display: none;">
+                            <div class="info-box">
+                                <h4>Détails de Virement Bancaire</h4>
+                                <p><strong>Bénéficiaire:</strong> Keny Cruz</p>
+                                <p><strong>Email:</strong> kenycruz701@gmail.com</p>
+                                <p><strong>Téléphone:</strong> +229 0143515312</p>
+                                <p><strong>WhatsApp:</strong> +229 0143515312</p>
+                                <p style="margin-top: 15px; color: #e74c3c;"><strong>Veuillez contacter pour les coordonnées bancaires</strong></p>
+                            </div>
+                        </div>
+
+                        <!-- Mobile Money Details -->
+                        <div id="mobile-money-details" class="bank-details" style="display: none;">
+                            <div class="info-box">
+                                <h4 id="mobileMoneyTitle">Paiement Mobile Money</h4>
+                                <p><strong>Numéro de Paiement:</strong> <span id="mobileMoneyNumber">+229 0143515312</span></p>
+                                <p><strong>Nom:</strong> Keny Cruz</p>
+                                <p><strong>Email:</strong> kenycruz701@gmail.com</p>
+                                <p style="margin-top: 15px; color: #e74c3c;"><strong>Veuillez envoyer la preuve de paiement par WhatsApp au +229 0143515312</strong></p>
+                            </div>
+                        </div>
+
+                        <div class="order-summary">
+                            <h3>Résumé de Commande</h3>
+                            <div id="orderSummary"></div>
+                            <div class="summary-row total">
+                                <span>Total à payer:</span>
+                                <span id="checkoutTotal">0.00€</span>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-payment" id="paymentBtn">Confirmer le Paiement</button>
+                        <button type="button" class="btn-cancel-checkout" onclick="backToCart()">Retour au Panier</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>À Propos de Africa Cuisine</h2>
+                    <p>Bienvenue chez Africa Cuisine! Nous vous proposons les meilleures recettes traditionnelles africaines, authentiques et savoureuses.</p>
+                    <p>Notre mission est de vous faire découvrir les richesses culinaires de l'Afrique, de la Méditerranée au Sahel, en passant par les cuisines de l'Afrique de l'Ouest et de l'Est.</p>
+                    <p>Chaque plat est préparé avec soin, utilisant les ingrédients les plus frais et les techniques culinaires traditionnelles africaines.</p>
+                </div>
+                <div class="about-info">
+                    <div class="info-card animate-fade">
+                        <i class="fas fa-user-circle"></i>
+                        <h3>Créateur & Concepteur</h3>
+                        <p>Keny Cruz</p>
+                    </div>
+                    <div class="info-card animate-fade">
+                        <i class="fas fa-envelope"></i>
+                        <h3>Email</h3>
+                        <p>kenycruz701@gmail.com</p>
+                    </div>
+                    <div class="info-card animate-fade">
+                        <i class="fas fa-phone"></i>
+                        <h3>Téléphone</h3>
+                        <p>+229 0143515312</p>
+                    </div>
+                    <div class="info-card animate-fade">
+                        <i class="fas fa-whatsapp"></i>
+                        <h3>WhatsApp</h3>
+                        <p>+229 0143515312</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="section-title">Nous Contacter</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <h3>Email</h3>
+                        <p><a href="mailto:kenycruz701@gmail.com">kenycruz701@gmail.com</a></p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <h3>Téléphone</h3>
+                        <p><a href="tel:+2290143515312">+229 0143515312</a></p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-whatsapp"></i>
+                        <h3>WhatsApp</h3>
+                        <p><a href="https://wa.me/2290143515312">+229 0143515312</a></p>
+                    </div>
+                </div>
+                <form class="contact-form" id="contactForm">
+                    <input type="text" placeholder="Votre nom" required>
+                    <input type="email" placeholder="Votre email" required>
+                    <textarea placeholder="Votre message" rows="5" required></textarea>
+                    <button type="submit" class="btn-send">Envoyer</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Currency Converter Section -->
+    <section class="currency-converter-section">
+        <div class="container">
+            <div class="converter-card">
+                <h2><i class="fas fa-exchange-alt"></i> Convertisseur de Devises</h2>
+                <p class="converter-subtitle">Convertir EUR en Francs CFA</p>
+                
+                <div class="converter-inputs">
+                    <div class="input-group">
+                        <label for="eurAmount">Montant en EUR</label>
+                        <div class="input-wrapper">
+                            <input type="number" id="eurAmount" placeholder="Entrez le montant" min="0" step="0.01" value="1">
+                            <span class="currency-badge">EUR</span>
+                        </div>
+                    </div>
+                    
+                    <div class="exchange-button">
+                        <button id="swapBtn" class="btn-swap" title="Inverser les devises">
+                            <i class="fas fa-exchange-alt"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="cfaAmount">Montant en Francs CFA</label>
+                        <div class="input-wrapper">
+                            <input type="number" id="cfaAmount" placeholder="Montant converti" readonly>
+                            <span class="currency-badge">XOF</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="exchange-rate-info">
+                    <p>Taux de change: <strong id="exchangeRate">655.957</strong> XOF = 1 EUR</p>
+                    <small>Mis à jour le: <span id="updateTime">Aujourd'hui</span></small>
+                </div>
+                
+                <div class="currency-note">
+                    <p><i class="fas fa-info-circle"></i> XOF est la devise utilisée au Bénin, Sénégal, Côte d'Ivoire et autres pays d'Afrique de l'Ouest</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Admin Area Modal -->
+    <div class="modal" id="adminModal">
+        <div class="admin-modal-content animate-scale">
+            <span class="admin-modal-close" onclick="closeAdminModal()">&times;</span>
+            
+            <div id="admin-login" style="display: block;">
+                <h2><i class="fas fa-lock"></i> Espace Admin</h2>
+                <form id="adminLoginForm" onsubmit="event.preventDefault(); authenticateAdmin();">
+                    <div class="form-group">
+                        <label for="adminPassword">Mot de passe administrateur:</label>
+                        <input type="password" id="adminPassword" placeholder="Entrez le mot de passe" required>
+                    </div>
+                    <button type="submit" class="btn-add-to-cart" style="width: 100%;">Se Connecter</button>
+                </form>
+            </div>
+            
+            <div id="admin-panel" style="display: none;">
+                <div class="admin-header">
+                    <h2><i class="fas fa-boxes"></i> Gestion des Commandes</h2>
+                    <button class="logout-btn" onclick="logoutAdmin()"><i class="fas fa-sign-out-alt"></i> Déconnexion</button>
+                </div>
+                
+                <div class="admin-filters">
+                    <button class="status-filter-btn active" data-status="all" onclick="filterOrdersByStatus('all')">
+                        <i class="fas fa-list"></i> Toutes
+                    </button>
+                    <button class="status-filter-btn" data-status="pending" onclick="filterOrdersByStatus('pending')">
+                        <i class="fas fa-clock"></i> En Attente
+                    </button>
+                    <button class="status-filter-btn" data-status="completed" onclick="filterOrdersByStatus('completed')">
+                        <i class="fas fa-check-circle"></i> Complétées
+                    </button>
+                    <button class="status-filter-btn" data-status="cancelled" onclick="filterOrdersByStatus('cancelled')">
+                        <i class="fas fa-times-circle"></i> Annulées
+                    </button>
+                </div>
+                
+                <div class="orders-list" id="ordersList">
+                    <p style="text-align: center; color: var(--text-color);">Chargement des commandes...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Service Button (Floating) -->
+    <button class="service-btn" id="serviceBtn" title="Nos Services">
+        <i class="fas fa-concierge-bell"></i>
+    </button>
+
+    <!-- Service Panel Modal -->
+    <div class="service-panel" id="servicePanel">
+        <div class="service-panel-content">
+            <div class="service-panel-header">
+                <h2>Nos Services</h2>
+                <button class="service-close-btn" id="servicePanelClose">&times;</button>
+            </div>
+            <!-- TAB NAVIGATION -->
+            <div class="service-tabs">
+                <button class="service-tab-btn active" data-tab="services">🎯 Services</button>
+                <button class="service-tab-btn" data-tab="dishes">🍛 Plats Vedettes</button>
+                <button class="service-tab-btn" data-tab="recipes">📝 Recettes</button>
+                <button class="service-tab-btn" data-tab="culture">🌍 Culture</button>
+            </div>
+
+            <!-- SERVICES TAB -->
+            <div class="service-tab-content active" id="tab-services">
+                <div class="service-grid">
+                    <!-- Service 1: Our Dishes -->
+                    <div class="service-card">
+                        <div class="service-icon">🍛</div>
+                        <h3>Nos Plats</h3>
+                        <p>Découvrez notre sélection de plats traditionnels africains authentiques et savoureux.</p>
+                        <a href="#menu" class="service-btn-link">En savoir plus</a>
+                    </div>
+
+                    <!-- Service 2: Delivery -->
+                    <div class="service-card">
+                        <div class="service-icon">🚚</div>
+                        <h3>Livraison</h3>
+                        <p>Livraison à domicile rapide et fiable. Commandez en ligne et savourez chez vous.</p>
+                        <a href="#checkout" class="service-btn-link">Commander</a>
+                    </div>
+
+                    <!-- Service 3: Catering -->
+                    <div class="service-card">
+                        <div class="service-icon">🎉</div>
+                        <h3>Catering</h3>
+                        <p>Solutions de restauration organisées pour mariages, anniversaires et célébrations traditionnelles.</p>
+                        <div style="display:flex; gap:8px; justify-content:center; margin-top:8px;">
+                            <button class="service-btn-link" id="openCateringBtn">Voir les options</button>
+                            <a href="#contact" class="service-btn-link">Demander un devis</a>
+                        </div>
+                    </div>
+
+                    <!-- Service 4: Cooking Workshops -->
+                    <div class="service-card">
+                        <div class="service-icon">📚</div>
+                        <h3>Ateliers Culinaires</h3>
+                        <p>Apprenez à préparer les plats africains authentiques avec nos chefs expérimentés.</p>
+                        <div style="display:flex; gap:8px; justify-content:center; margin-top:8px;">
+                            <button class="service-btn-link" id="openWorkshopBtn">S'inscrire</button>
+                            <a href="#contact" class="service-btn-link">Contact</a>
+                        </div>
+                    </div>
+
+                    <!-- Service 5: Culture & Traditions -->
+                    <div class="service-card">
+                        <div class="service-icon">🌍</div>
+                        <h3>Culture & Traditions</h3>
+                        <p>Explorez l'histoire et les traditions culinaires des différents pays africains.</p>
+                        <div style="display:flex; gap:8px; justify-content:center; margin-top:8px;">
+                            <button class="service-btn-link" id="openCultureBtn">Découvrir</button>
+                            <a href="#about" class="service-btn-link">À propos</a>
+                        </div>
+                    </div>
+
+                    <!-- Service 6: Recipes -->
+                    <div class="service-card">
+                        <div class="service-icon">📝</div>
+                        <h3>Recettes</h3>
+                        <p>Recettes détaillées, conseils de préparation et techniques culinaires africaines.</p>
+                        <div style="display:flex; gap:8px; justify-content:center; margin-top:8px;">
+                            <button class="service-btn-link" id="openRecipesBtn">Explorer</button>
+                            <a href="other-menus.html" class="service-btn-link">Voir tout</a>
+                        </div>
+                    </div>
+                    </div> <!-- .service-grid -->
+
+                    <!-- Catering Details sub-panel (hidden until requested) -->
+                    <div id="cateringDetails" class="catering-details" aria-hidden="true" style="display:none;">
+                        <button id="closeCateringDetails" class="catering-close">✕</button>
+                        <h3>Options de Catering</h3>
+                        <p class="muted">Choisissez une formule adaptée à votre événement. Cliquez sur "Demander un devis" pour recevoir une proposition personnalisée.</p>
+                        <div class="catering-sections">
+                            <div class="catering-item">
+                                <h4>Mariages</h4>
+                                <p>Menus festifs, buffets élégants, service à table, options végétariennes et halal. Gestion complète du menu et coordination sur place.</p>
+                                <div class="catering-actions"><a href="#contact" class="service-btn-link">Demander un devis</a></div>
+                            </div>
+                            <div class="catering-item">
+                                <h4>Anniversaires</h4>
+                                <p>Formules enfant / adulte, buffets thématiques, station live-cooking, pâtisseries traditionnelles et modernes.</p>
+                                <div class="catering-actions"><a href="#contact" class="service-btn-link">Demander un devis</a></div>
+                            </div>
+                            <div class="catering-item">
+                                <h4>Fêtes traditionnelles</h4>
+                                <p>Menus authentiques de différentes régions d'Afrique, plats rituels, options pour grandes tablées et logistique culturelle.</p>
+                                <div class="catering-actions"><a href="#contact" class="service-btn-link">Demander un devis</a></div>
+                            </div>
+                            <div class="catering-item">
+                                <h4>Événements d'entreprise</h4>
+                                <p>Buffets, petits déjeuners d'affaires, pauses-café, plateaux-repas et traiteur sur-mesure pour conférences.</p>
+                                <div class="catering-actions"><a href="#contact" class="service-btn-link">Demander un devis</a></div>
+                            </div>
+                        </div>
+                        <div class="catering-footer">
+                            <p class="muted small">Besoin d'un menu personnalisé, d'options d'accessibilité alimentaire ou d'une coordination culturelle ? Indiquez vos besoins dans la demande de devis.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FEATURED DISHES TAB -->
+            <div class="service-tab-content" id="tab-dishes">
+                <div class="featured-dishes-section">
+                    <h3 class="featured-title">Plats Traditionnels Africains Authentiques</h3>
+                    <div class="featured-dishes-grid" id="featuredDishesGrid">
+                        <!-- Featured dishes will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- RECIPES TAB -->
+            <div class="service-tab-content" id="tab-recipes">
+                <div class="recipes-section">
+                    <h3 class="featured-title">Recettes & Techniques</h3>
+                    <div class="recipes-grid" id="recipesGrid">
+                        <!-- Recipe cards will be populated by JavaScript -->
+                    </div>
+
+                    <div class="techniques-section" id="techniquesSection">
+                        <h4>Techniques & Conseils de Préparation</h4>
+                        <ul class="techniques-list">
+                            <li><strong>Rôtissage des épices:</strong> torréfier légèrement les épices entières pour intensifier les arômes.</li>
+                            <li><strong>Mijotage lent:</strong> laisser cuire à feu doux pour développer les saveurs des ragoûts traditionnels.</li>
+                            <li><strong>Préparation du couscous:</strong> séparer les grains et les aérer pendant la cuisson pour une texture légère.</li>
+                            <li><strong>Usage des fumets:</strong> utiliser légumes rôtis et os pour enrichir les bouillons.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CULTURE & TRADITIONS TAB -->
+            <div class="service-tab-content" id="tab-culture">
+                <div class="culture-section">
+                    <h3 class="featured-title">Récits & Traditions Culinaires</h3>
+                    <div class="culture-controls">
+                        <label>Filtrer par région:
+                            <select id="cultureRegionFilter">
+                                <option value="all">Toutes</option>
+                                <option value="North">Nord</option>
+                                <option value="West">Ouest</option>
+                                <option value="East">Est</option>
+                                <option value="Central">Centre</option>
+                                <option value="Southern">Sud</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="culture-grid" id="cultureGrid">
+                        <!-- Story cards populated by JS -->
+                    </div>
+
+                    <div class="culture-interactive" id="cultureInteractive">
+                        <h4>Éléments interactifs</h4>
+                        <p class="muted">Cliquez sur un récit pour lire l'histoire complète, voir les photos, et découvrir les techniques associées.</p>
+                        <div class="culture-accordion">
+                            <details>
+                                <summary>Rituels et repas communautaires</summary>
+                                <p>Les repas sont souvent partagés lors de cérémonies; certaines préparations nécessitent plusieurs heures et la participation de la communauté.</p>
+                            </details>
+                            <details>
+                                <summary>Épices et mélanges</summary>
+                                <p>Chaque région a ses mélanges d'épices caractéristiques—apprenez à les torréfier et les moudre pour libérer des arômes uniques.</p>
+                            </details>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p> Africa Cuisine. Tous les droits réservés. Créé par Keny Cruz</p>
+            <p style="font-size: 0.9em; color: #888; margin-top: 8px;">🎵 Musique de fond: <a href="#" style="color: var(--primary-color); text-decoration: none;">Clavier-Music</a></p>
+            <div class="contact-links" style="margin: 15px 0; font-size: 0.95em;">
+                <p>📧 Email: <a href="mailto:kenycruz701@gmail.com" style="color: var(--primary-color); text-decoration: none;">kenycruz701@gmail.com</a></p>
+            </div>
+            <div class="social-links">
+                <a href="https://www.facebook.com/profile.php?id=61582453447890" title="Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook"></i></a>
+                <a href="https://instagram.com/moncoeurcruz" title="Instagram" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                <a href="mailto:kenycruz701@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="js/menu-data.js"></script>
+    <script src="js/african-dishes.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
